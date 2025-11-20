@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jobtrainer.ai | The Neural Interface for Workforce Evolution</title>
+    <meta name="description" content="Secure the nexus of human potential and artificial intelligence. jobtrainer.ai is available for immediate acquisition.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030712',
+                            primary: '#00f6ff',
+                            secondary: '#7b2cbf',
+                            accent: '#f72585',
+                            glass: 'rgba(0, 246, 255, 0.05)',
+                            neon: '#00f6ff',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'scan': 'scan 4s linear infinite',
+                        'glitch': 'glitch 1s linear infinite',
+                        'slide-up': 'slide-up 0.5s ease-out',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #00f6ff, 0 0 10px #00f6ff, 0 0 15px #7b2cbf, 0 0 20px #7b2cbf' },
+                            '100%': { boxShadow: '0 0 10px #00f6ff, 0 0 20px #00f6ff, 0 0 30px #7b2cbf, 0 0 40px #7b2cbf' },
+                        },
+                        scan: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '100% 50%' },
+                        },
+                        glitch: {
+                            '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                            '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                            '62%': { transform: 'translate(0,0) skew(5deg)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(20px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 },
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'circuit-pattern': "url('https://www.transparenttextures.com/patterns/circuit-board.png')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030712;
+            color: white;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #00f6ff 0%, #7b2cbf 50%, #f72585 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: scan 4s linear infinite;
+        }
+
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(0, 246, 255, 0.1) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 246, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        .glass-card {
+            background: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 246, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 246, 255, 0.1) inset;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 246, 255, 0.5);
+            box-shadow: 0 0 30px rgba(0, 246, 255, 0.2) inset, 0 0 20px rgba(0, 246, 255, 0.2);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .neon-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 246, 255, 0.4), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .neon-button:hover::before {
+            left: 100%;
+        }
+        
+        .neon-button:hover {
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 246, 255, 0.8);
+        }
+
+        .glitch-effect {
+            position: relative;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-effect::before {
+            left: 2px;
+            text-shadow: -1px 0 #f72585;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-effect::after {
+            left: -2px;
+            text-shadow: -1px 0 #00f6ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch 5s infinite linear alternate;
+        }
+
+        /* Holographic UI elements */
+        .hologram {
+            background: rgba(0, 246, 255, 0.05);
+            border: 1px solid rgba(0, 246, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 246, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 8;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0, 246, 255, 0.2) 10%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-primary selection:text-black">
+
+    <!-- Background Gradients & Patterns -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 bg-circuit-pattern opacity-10 mix-blend-overlay"></div>
+        <div class="absolute top-0 left-0 w-[800px] h-[800px] bg-brand-primary/20 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2 animate-pulse-slow"></div>
+        <div class="absolute bottom-0 right-0 w-[800px] h-[800px] bg-brand-secondary/20 rounded-full blur-[150px] translate-x-1/2 translate-y-1/2 animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
+        <div class="scanline"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="relative z-50 w-full px-6 py-6 flex justify-between items-center max-w-7xl mx-auto">
+        <div class="text-2xl font-display font-bold tracking-tight flex items-center gap-2">
+            <!-- CPU Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-brand-primary animate-pulse-fast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+            <span class="glitch-effect" data-text="jobtrainer.ai">jobtrainer<span class="text-brand-primary">.ai</span></span>
+        </div>
+        <a href="https://www.namecheap.com/domains/registration/results/?domain=jobtrainer.ai" target="_blank" class="neon-button px-6 py-2 rounded-full border border-brand-primary/30 hover:bg-brand-primary/10 transition-all text-sm font-medium backdrop-blur-sm flex items-center gap-2 group">
+            <span class="group-hover:text-brand-primary transition-colors">Buy on Namecheap</span>
+            <!-- External Link Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 group-hover:text-brand-primary transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="relative z-10 pt-20 pb-32 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-sm font-medium mb-8 animate-slide-up">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
+                </span>
+                NEXUS_AVAILABLE_FOR_TRANSFER
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl font-display font-bold tracking-tighter mb-6 animate-slide-up" style="animation-delay: 0.1s;">
+                jobtrainer<span class="gradient-text">.ai</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-mono animate-slide-up" style="animation-delay: 0.2s;">
+                The definitive neural pathway for the 2050 workforce. <br>
+                Perfect for <span class="text-brand-primary">Generative Coaching</span>, <span class="text-brand-secondary">Sentient HR Systems</span>, or <span class="text-brand-accent">Immersive EdTech</span>.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style="animation-delay: 0.3s;">
+                <a href="https://www.namecheap.com/domains/registration/results/?domain=jobtrainer.ai" target="_blank" class="neon-button w-full sm:w-auto px-8 py-4 bg-brand-primary text-black rounded-full font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 group">
+                    <!-- Shopping Cart Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                    Buy on Namecheap
+                </a>
+                <a href="#potential" class="neon-button w-full sm:w-auto px-8 py-4 glass-card rounded-full font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2 group">
+                    <!-- Zap Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400 group-hover:animate-pulse-fast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    Visualize Potential
+                </a>
+            </div>
+        </div>
+
+        <!-- Value Props Grid -->
+        <div class="max-w-7xl mx-auto mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up" style="animation-delay: 0.4s;">
+            <div class="glass-card p-8 rounded-2xl group">
+                <div class="bg-brand-primary/20 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:animate-glow transition-all">
+                    <!-- Brain Circuit Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-brand-primary w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>
+                </div>
+                <h3 class="text-xl font-display font-bold mb-2">Category Defining Matrix</h3>
+                <p class="text-gray-400 text-sm font-mono">"Job Trainer" is a high-volume query in the neural net. Owning the .ai TLD establishes instant dominance.</p>
+            </div>
+            <div class="glass-card p-8 rounded-2xl group">
+                <div class="bg-brand-secondary/20 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:animate-glow transition-all">
+                    <!-- CPU Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-brand-secondary w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+                </div>
+                <h3 class="text-xl font-display font-bold mb-2">Future-Proof Protocol</h3>
+                <p class="text-gray-400 text-sm font-mono">The .ai extension is the gold standard for post-human intelligence. It signals innovation and automation.</p>
+            </div>
+            <div class="glass-card p-8 rounded-2xl group">
+                <div class="bg-brand-accent/20 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:animate-glow transition-all">
+                    <!-- Shield Check Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-brand-accent w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <h3 class="text-xl font-display font-bold mb-2">Brand Singularity</h3>
+                <p class="text-gray-400 text-sm font-mono">Short, memorable, and professional. Builds immediate trust with sentient enterprise clients.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Use Case Illustration Section -->
+    <section id="potential" class="relative py-24 px-6 border-t border-brand-primary/10 bg-brand-dark/50 overflow-hidden">
+        <!-- Section Background Effect -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-radial from-brand-primary/20 to-transparent rounded-full blur-[100px] animate-pulse-slow"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left: Text -->
+                <div class="animate-slide-up">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Architect the Future of Human Capital</h2>
+                    <p class="text-gray-400 text-lg mb-8 font-mono">
+                        This domain is a blank canvas for a billion-credit idea. Here is what you could build on <strong>jobtrainer.ai</strong>:
+                    </p>
+
+                    <div class="space-y-8">
+                        <div class="flex gap-4 group">
+                            <div class="mt-1 bg-brand-primary/10 p-3 rounded-lg h-fit group-hover:animate-glow transition-all">
+                                <!-- Bot Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-brand-primary w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-display font-bold">Holographic Interview Coach</h4>
+                                <p class="text-gray-500 text-sm font-mono">Real-time biometric analysis and feedback for candidates practicing for high-stakes interviews in the metaverse.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 group">
+                            <div class="mt-1 bg-brand-secondary/10 p-3 rounded-lg h-fit group-hover:animate-glow transition-all">
+                                <!-- Network Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-brand-secondary w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-display font-bold">Sentient Onboarding Agent</h4>
+                                <p class="text-gray-500 text-sm font-mono">An automated LMS that downloads company culture, codebases, and protocols directly into new employee neural links.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 group">
+                            <div class="mt-1 bg-brand-accent/10 p-3 rounded-lg h-fit group-hover:animate-glow transition-all">
+                                <!-- Glasses Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-brand-accent w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="15" r="4"/><circle cx="18" cy="15" r="4"/><path d="M14 15a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M2.5 13 5 7c.7-1.3 1.4-2 3-2"/><path d="M21.5 13 19 7c-.7-1.3-1.5-2-3-2"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-display font-bold">Full-Dive Soft Skills Simulator</h4>
+                                <p class="text-gray-500 text-sm font-mono">Immersive training for conflict resolution and leadership skills powered by hyper-realistic generative agents.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: CSS Visual Mockup -->
+                <div class="relative animate-float">
+                    <!-- Abstract glowing backdrop -->
+                    <div class="absolute -inset-6 bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent rounded-2xl blur-3xl opacity-30 animate-pulse-slow"></div>
+                    
+                    <!-- Mockup Window -->
+                    <div class="relative bg-[#0a0f1d] border border-brand-primary/30 rounded-xl shadow-2xl overflow-hidden hologram">
+                        <!-- Mock Browser Header -->
+                        <div class="bg-gray-900/50 px-4 py-3 border-b border-brand-primary/30 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500/80 animate-pulse-fast"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/80 animate-pulse-fast" style="animation-delay: 0.2s;"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/80 animate-pulse-fast" style="animation-delay: 0.4s;"></div>
+                            <div class="ml-4 bg-brand-primary/10 px-3 py-1 rounded text-xs text-brand-primary font-mono flex-1 flex items-center justify-between">
+                                <span>https://jobtrainer.ai/session/active</span>
+                                <!-- Wifi Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 animate-pulse-fast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Mock Content -->
+                        <div class="p-6 space-y-6 font-mono text-sm relative">
+                             <!-- Animated grid overly -->
+                             <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+
+                            <!-- AI Message -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center shrink-0 animate-glow">
+                                    <!-- Bot Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                                </div>
+                                <div class="space-y-2 w-full">
+                                    <div class="bg-brand-primary/10 border border-brand-primary/30 p-4 rounded-r-xl rounded-bl-xl text-brand-primary text-xs md:text-sm relative overflow-hidden">
+                                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-brand-primary/20 to-transparent animate-scan" style="animation-duration: 2s;"></div>
+                                        <p class="relative z-10">Greeting, unit #492. My analysis of your last negotiation simulation indicates a 14.5% increase in persuasiveness. Shall we initiate the 'Advanced Objection Handling' module?</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <div class="h-2 w-24 bg-brand-primary/20 rounded animate-pulse"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User Message -->
+                            <div class="flex gap-4 flex-row-reverse">
+                                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center shrink-0 border border-gray-600">
+                                    <!-- User Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                </div>
+                                <div class="bg-brand-secondary/20 border border-brand-secondary/30 p-4 rounded-l-xl rounded-br-xl text-brand-secondary text-xs md:text-sm relative overflow-hidden">
+                                     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-brand-secondary/20 to-transparent animate-scan" style="animation-duration: 3s;"></div>
+                                    <p class="relative z-10">Affirmative. Focus on pricing resistance scenarios.</p>
+                                </div>
+                            </div>
+
+                            <!-- AI Typing -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center shrink-0 animate-glow">
+                                    <!-- Bot Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                                </div>
+                                <div class="bg-brand-primary/10 border border-brand-primary/30 px-6 py-4 rounded-r-xl rounded-bl-xl">
+                                    <div class="flex gap-2">
+                                        <div class="w-2 h-2 bg-brand-primary rounded-full animate-bounce"></div>
+                                        <div class="w-2 h-2 bg-brand-primary rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                        <div class="w-2 h-2 bg-brand-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Mock Controls -->
+                            <div class="pt-6 border-t border-brand-primary/20 flex justify-between items-center">
+                                <div class="flex gap-3">
+                                    <div class="w-10 h-10 rounded bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center hover:bg-brand-primary/20 transition-colors cursor-pointer">
+                                        <!-- Mic Icon -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+                                    </div>
+                                    <div class="w-10 h-10 rounded bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center hover:bg-brand-primary/20 transition-colors cursor-pointer">
+                                        <!-- Video Icon -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
+                                    </div>
+                                    <div class="w-10 h-10 rounded bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center hover:bg-brand-primary/20 transition-colors cursor-pointer">
+                                        <!-- Brain Circuit Icon -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>
+                                    </div>
+                                </div>
+                                <div class="neon-button px-6 py-3 bg-red-500/20 border border-red-500/50 text-red-400 rounded-lg text-xs font-bold cursor-pointer hover:bg-red-500/30 transition-colors flex items-center gap-2">
+                                    <!-- Power Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                                    Terminate Session
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Pricing Section -->
+    <section id="inquire" class="py-24 px-6 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-10 md:p-20 text-center overflow-hidden relative group hover:border-brand-primary/60 transition-all duration-500">
+            <!-- Decorative blobs -->
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+                <div class="absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[120px] animate-pulse-slow"></div>
+                <div class="absolute bottom-[-50%] right-[20%] w-[600px] h-[600px] bg-brand-secondary/20 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 2.5s;"></div>
+                <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+            </div>
+
+            <div class="relative z-10 animate-slide-up">
+                <div class="mb-6 flex justify-center">
+                    <!-- Lock Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-brand-primary animate-pulse-fast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 glitch-effect" data-text="Secure this asset today.">Secure this asset today.</h2>
+                <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto font-mono">
+                    Domains of this quality are rare neural pathways. Once it's re-routed, it's gone forever.
+                    Available immediately via Namecheap Marketplace protocol.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <a href="https://www.namecheap.com/domains/registration/results/?domain=jobtrainer.ai" target="_blank" class="neon-button w-full md:w-auto px-10 py-5 bg-brand-primary text-black rounded-lg font-bold hover:scale-105 transition-transform flex items-center justify-center gap-3 text-lg group">
+                        <!-- Shopping Cart Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                        Buy on Namecheap
+                    </a>
+                    <button onclick="copyDomain()" class="neon-button w-full md:w-auto px-10 py-5 border border-brand-primary/30 rounded-lg font-medium hover:bg-brand-primary/10 transition-colors flex items-center justify-center gap-3 text-lg group">
+                        <!-- Copy Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:animate-pulse-fast transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        <span id="copyText">Copy Domain Protocol</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 text-center text-gray-500 text-sm relative z-10 font-mono border-t border-brand-primary/10">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> JobTrainer.ai. All rights reserved.</p>
+        <p class="mt-2">This domain is currently parked and for sale.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Copy Logic
+        function copyDomain() {
+            const domain = "jobtrainer.ai";
+            // Attempt to use navigator.clipboard (modern API)
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                 navigator.clipboard.writeText(domain).then(() => {
+                    showCopiedFeedback();
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                    fallbackCopyTextToClipboard(domain);
+                });
+            } else {
+                // Fallback for older browsers or restricted iframe contexts
+                fallbackCopyTextToClipboard(domain);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                if(successful) {
+                     showCopiedFeedback();
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        function showCopiedFeedback() {
+            const btnSpan = document.getElementById('copyText');
+            const originalText = btnSpan.innerText;
+            btnSpan.innerText = "Protocol Copied!";
+            setTimeout(() => {
+                btnSpan.innerText = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
